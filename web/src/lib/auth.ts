@@ -9,6 +9,7 @@ export type CurrentUser = {
   id: string;
   fullName: string;
   email: string;
+  matricNo: string | null;
   role: Enums<"user_role">;
   organiserStatus: Enums<"organiser_status">;
 };
@@ -25,7 +26,7 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
 
   const { data: profile } = await supabase
     .from("users")
-    .select("user_id, full_name, email, role, organiser_status")
+    .select("user_id, full_name, email, matric_no, role, organiser_status")
     .eq("user_id", auth.user.id)
     .single();
   if (!profile) return null;
@@ -34,6 +35,7 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
     id: profile.user_id,
     fullName: profile.full_name,
     email: profile.email,
+    matricNo: profile.matric_no,
     role: profile.role,
     organiserStatus: profile.organiser_status,
   };

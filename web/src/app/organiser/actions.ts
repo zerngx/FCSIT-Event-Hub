@@ -100,5 +100,12 @@ export async function checkInTicket(token: string): Promise<ScanResult> {
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("check_in", { p_token: token.trim() });
   if (error) return { ok: false, error: "Could not check in. Try again." };
-  return data as ScanResult;
+  const result = data as ScanResult;
+  // The database returns the private storage path; storage policies let this organiser sign it
+  // only for students registered to their own events.
+  if (result.photo_url) {
+    const { data: signed } = await supabase.storage.from("profile-photos").createSignedUrl(result.photo_url, 300);
+    result.photo_url = signed?.signedUrl ?? null;
+  }
+  return result;
 }

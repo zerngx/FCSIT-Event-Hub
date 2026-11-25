@@ -109,6 +109,11 @@ async function EventDetail({ params }: { params: PageProps<"/events/[id]">["para
 
       <section aria-label="Registration" className="flex flex-col items-center justify-center gap-4 rounded-[var(--radius-bento)] bg-paper p-6 text-center sm:p-8">
         <p className={`${monoTag} text-muted`}>{"// your spot"}</p>
+        {user.role === "student" && !user.matricNo && (
+          <Link href="/profile" className="rounded-2xl bg-amber px-4 py-2 text-xs font-bold hover:bg-amber-deep">
+            Add your matric number so organisers can verify you at the door &rarr;
+          </Link>
+        )}
         {message ? (
           <p className="max-w-xs font-display text-xl uppercase leading-tight">{message}</p>
         ) : user.role !== "student" ? (

@@ -99,6 +99,10 @@ export function Scanner() {
           <p className="font-display text-2xl uppercase leading-tight">{describe(result)}</p>
           {result.full_name !== undefined && (
             <>
+              {result.photo_url && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={result.photo_url} alt={`Profile photo of ${result.full_name ?? "the student"}`} width={96} height={96} className="h-24 w-24 rounded-2xl object-cover ring-4 ring-paper/60" />
+              )}
               <p className="pt-2 text-xl font-bold">{result.full_name || "Name not set"}</p>
               <p className="font-mono text-sm opacity-90">
                 {result.matric_no ?? "No matric number"}

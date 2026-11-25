@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 // Refreshes the Supabase session cookie on every request and sends signed-out
 // visitors away from protected pages. This is only an optimistic check:
 // every page and Server Action re-verifies the user (see src/lib/auth.ts).
-const PROTECTED_PREFIXES = ["/events", "/organiser", "/admin", "/ticket"];
+const PROTECTED_PREFIXES = ["/events", "/organiser", "/admin", "/ticket", "/profile"];
 
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });

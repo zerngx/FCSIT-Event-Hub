@@ -44,13 +44,13 @@ export async function UserNav() {
           Admin
         </Link>
       )}
-      <span className="flex items-center gap-2 rounded-full bg-paper p-1 sm:pr-3">
+      <Link href="/profile" aria-label="My profile" className="flex items-center gap-2 rounded-full bg-paper p-1 transition hover:bg-amber sm:pr-3">
         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber font-display text-xs" title={user.fullName || user.email}>
           {initials}
         </span>
         <span className="hidden max-w-32 truncate sm:inline">{user.fullName || user.email}</span>
         <span className="hidden font-mono text-[10px] uppercase text-muted sm:inline">{user.role}</span>
-      </span>
+      </Link>
       <form action={logout}>
         <button type="submit" className="rounded-full px-2 py-2 hover:bg-paper sm:px-3">
           Sign out
