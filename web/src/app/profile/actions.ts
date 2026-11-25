@@ -3,17 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
+import { PROGRAMMES } from "@/lib/programmes";
 
 export type ProfileState = { error?: string; message?: string } | undefined;
-
-export const PROGRAMMES = [
-  "Artificial Intelligence",
-  "Computer System and Network",
-  "Data Science",
-  "Information Systems",
-  "Multimedia Computing",
-  "Software Engineering",
-] as const;
 
 const MATRIC = /^[A-Za-z0-9/]{6,12}$/;
 const PHONE = /^\+?[0-9 -]{8,16}$/;

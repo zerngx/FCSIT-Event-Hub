@@ -42,8 +42,11 @@ async function ProfileLoader() {
     photoUrl = signed?.signedUrl ?? null;
   }
 
+  // Keyed on the saved values so the form remounts with fresh defaults after each save
+  // (React resets uncontrolled fields to their first-render defaults after a form action).
   return (
     <ProfileForm
+      key={[data?.full_name, data?.matric_no, data?.programme, data?.year_of_study, data?.phone, data?.photo_url].join("|")}
       values={{
         fullName: data?.full_name ?? "",
         matricNo: data?.matric_no ?? "",

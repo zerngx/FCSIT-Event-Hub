@@ -2,7 +2,8 @@
 
 import { useActionState } from "react";
 import { btnForest, input, label } from "@/lib/ui";
-import { saveProfile, PROGRAMMES } from "./actions";
+import { PROGRAMMES } from "@/lib/programmes";
+import { saveProfile } from "./actions";
 
 type Values = {
   fullName: string;
