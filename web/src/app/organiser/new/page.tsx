@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { requireOrganiser } from "@/lib/auth";
 import { heading, monoTag } from "@/lib/ui";
+import { createEvent } from "../actions";
 import { EventForm } from "./event-form";
 
 export const metadata = { title: "New event | FCSIT Event Hub" };
@@ -25,5 +26,5 @@ export default function NewEventPage() {
 
 async function Guarded() {
   await requireOrganiser();
-  return <EventForm />;
+  return <EventForm action={createEvent} submitLabel="Save as draft" />;
 }

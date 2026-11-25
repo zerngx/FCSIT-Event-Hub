@@ -78,6 +78,9 @@ async function ManageEvent({ params }: { params: PageProps<"/organiser/events/[i
               <button className={btnGhost}>Reopen</button>
             </form>
           )}
+          <Link href={`/organiser/events/${event.event_id}/edit`} className={btnGhost}>
+            Edit details
+          </Link>
           <a href={`/organiser/events/${event.event_id}/attendance.csv`} className={btnGhost}>
             Download CSV
           </a>

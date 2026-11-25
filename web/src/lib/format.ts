@@ -27,3 +27,8 @@ export function formatDateTime(iso: string) {
 export function formatTime(iso: string) {
   return timeOnly.format(new Date(iso));
 }
+
+// ISO timestamp -> value for <input type="datetime-local"> in Malaysia time.
+export function toMalaysiaInput(iso: string) {
+  return new Date(Date.parse(iso) + 8 * 3600_000).toISOString().slice(0, 16);
+}
