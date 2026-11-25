@@ -10,6 +10,7 @@ import { RegisterButton } from "./register-button";
 import { TicketQr } from "./ticket-qr";
 import { Sparkle } from "@/components/decor";
 import { heading, monoTag } from "@/lib/ui";
+import { Skeleton } from "@/components/skeleton";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -19,7 +20,7 @@ export default function EventPage(props: PageProps<"/events/[id]">) {
       <Link href="/events" className={`${monoTag} inline-flex rounded-full bg-paper px-3 py-1.5 hover:bg-amber`}>
         &larr; all events
       </Link>
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading event...</p>}>
+      <Suspense fallback={<Skeleton variant="detail" />}>
         <EventDetail params={props.params} />
       </Suspense>
     </div>

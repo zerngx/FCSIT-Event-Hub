@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { btnForest } from "@/lib/ui";
 import { logout } from "./auth/actions";
+import { SubmitButton } from "@/components/submit-button";
 
 export async function UserNav() {
   const user = await getCurrentUser();
@@ -52,9 +53,9 @@ export async function UserNav() {
         <span className="hidden font-mono text-[10px] uppercase text-muted sm:inline">{user.role}</span>
       </Link>
       <form action={logout}>
-        <button type="submit" className="rounded-full px-2 py-2 hover:bg-paper sm:px-3">
+        <SubmitButton className="inline-flex items-center gap-1.5 rounded-full px-2 py-2 hover:bg-paper sm:px-3" pendingLabel="Signing out...">
           Sign out
-        </button>
+        </SubmitButton>
       </form>
     </nav>
   );

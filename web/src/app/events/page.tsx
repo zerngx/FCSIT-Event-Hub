@@ -8,6 +8,8 @@ import { btnGhost, heading, monoTag } from "@/lib/ui";
 import { StatusBadge } from "./status-badge";
 import { requestOrganiserAccess } from "../organiser/actions";
 import type { Enums } from "@/lib/database.types";
+import { Skeleton } from "@/components/skeleton";
+import { SubmitButton } from "@/components/submit-button";
 
 export const metadata = { title: "Events | FCSIT Event Hub" };
 
@@ -22,7 +24,7 @@ export default function EventsPage() {
         <h1 className={`${heading} mt-2 text-5xl sm:text-6xl`}>Upcoming events</h1>
         <p className="mt-2 max-w-md text-sm text-cream/80">Every published FCSIT event, in one place. Tap a card to see seats and register.</p>
       </header>
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading events...</p>}>
+      <Suspense fallback={<Skeleton variant="cards" />}>
         <EventList />
       </Suspense>
     </div>
@@ -100,7 +102,7 @@ function OrganiserCta({ role, status }: { role: Enums<"user_role">; status: Enum
       <span className="font-semibold">
         {status === "rejected" ? "Your last organiser request was declined." : "Running a society event?"}
       </span>
-      <button className={btnGhost}>Request organiser access</button>
+      <SubmitButton className={btnGhost} pendingLabel="Sending...">Request organiser access</SubmitButton>
     </form>
   );
 }

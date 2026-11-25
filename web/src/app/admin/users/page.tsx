@@ -6,6 +6,7 @@ import { formatDateTime } from "@/lib/format";
 import { Sparkle } from "@/components/decor";
 import { btnDark, heading, input, monoTag } from "@/lib/ui";
 import { RoleControl } from "./role-control";
+import { Skeleton } from "@/components/skeleton";
 
 export const metadata = { title: "Users | FCSIT Event Hub" };
 
@@ -23,7 +24,7 @@ export default function AdminUsersPage(props: PageProps<"/admin/users">) {
           &larr; organiser requests
         </Link>
       </header>
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading users...</p>}>
+      <Suspense fallback={<Skeleton variant="list" />}>
         <Users searchParams={props.searchParams} />
       </Suspense>
     </div>

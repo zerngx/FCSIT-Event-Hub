@@ -7,6 +7,8 @@ import { formatDateTime, formatTime } from "@/lib/format";
 import { setEventStatus } from "../../actions";
 import { Sparkle } from "@/components/decor";
 import { btnDark, btnForest, btnGhost, heading, monoTag } from "@/lib/ui";
+import { Skeleton } from "@/components/skeleton";
+import { SubmitButton } from "@/components/submit-button";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -16,7 +18,7 @@ export default function ManageEventPage(props: PageProps<"/organiser/events/[id]
       <Link href="/organiser" className={`${monoTag} inline-flex rounded-full bg-paper px-3 py-1.5 hover:bg-amber`}>
         &larr; my events
       </Link>
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading event...</p>}>
+      <Suspense fallback={<Skeleton variant="detail" />}>
         <ManageEvent params={props.params} />
       </Suspense>
     </div>
@@ -60,7 +62,7 @@ async function ManageEvent({ params }: { params: PageProps<"/organiser/events/[i
         <div className="mt-6 flex flex-wrap gap-2">
           {event.status === "draft" && (
             <form action={setEventStatus.bind(null, event.event_id, "published")}>
-              <button className={btnForest}>Publish</button>
+              <SubmitButton className={btnForest} pendingLabel="Publishing...">Publish</SubmitButton>
             </form>
           )}
           {event.status === "published" && (
@@ -70,12 +72,12 @@ async function ManageEvent({ params }: { params: PageProps<"/organiser/events/[i
           )}
           {event.status === "published" && (
             <form action={setEventStatus.bind(null, event.event_id, "closed")}>
-              <button className={btnGhost}>Close event</button>
+              <SubmitButton className={btnGhost} pendingLabel="Closing...">Close event</SubmitButton>
             </form>
           )}
           {event.status === "closed" && (
             <form action={setEventStatus.bind(null, event.event_id, "published")}>
-              <button className={btnGhost}>Reopen</button>
+              <SubmitButton className={btnGhost} pendingLabel="Reopening...">Reopen</SubmitButton>
             </form>
           )}
           <Link href={`/organiser/events/${event.event_id}/edit`} className={btnGhost}>

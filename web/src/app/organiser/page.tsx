@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { formatDateTime } from "@/lib/format";
 import { Sparkle } from "@/components/decor";
 import { btnForest, heading, monoTag } from "@/lib/ui";
+import { Skeleton } from "@/components/skeleton";
 
 export const metadata = { title: "My events | FCSIT Event Hub" };
 
@@ -27,7 +28,7 @@ export default function OrganiserPage() {
           + New event
         </Link>
       </header>
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading...</p>}>
+      <Suspense fallback={<Skeleton variant="list" />}>
         <MyEvents />
       </Suspense>
     </div>

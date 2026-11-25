@@ -7,6 +7,7 @@ import { toMalaysiaInput } from "@/lib/format";
 import { heading, monoTag } from "@/lib/ui";
 import { updateEvent } from "../../../actions";
 import { EventForm } from "../../../new/event-form";
+import { Skeleton } from "@/components/skeleton";
 
 export const metadata = { title: "Edit event | FCSIT Event Hub" };
 
@@ -15,7 +16,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export default function EditEventPage(props: PageProps<"/organiser/events/[id]/edit">) {
   return (
     <div className="mx-auto max-w-2xl space-y-4">
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading event...</p>}>
+      <Suspense fallback={<Skeleton variant="form" />}>
         <EditLoader params={props.params} />
       </Suspense>
     </div>

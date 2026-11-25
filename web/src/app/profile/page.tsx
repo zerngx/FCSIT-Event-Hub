@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Sparkle } from "@/components/decor";
 import { heading, monoTag } from "@/lib/ui";
 import { ProfileForm } from "./profile-form";
+import { Skeleton } from "@/components/skeleton";
 
 export const metadata = { title: "My profile | FCSIT Event Hub" };
 
@@ -19,7 +20,7 @@ export default function ProfilePage() {
         </p>
       </header>
       <div className="rounded-[var(--radius-bento)] bg-paper p-6 sm:p-8">
-        <Suspense fallback={<p className={`${monoTag} text-muted`}>loading...</p>}>
+        <Suspense fallback={<Skeleton variant="form" />}>
           <ProfileLoader />
         </Suspense>
       </div>

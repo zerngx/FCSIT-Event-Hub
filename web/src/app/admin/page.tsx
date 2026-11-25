@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 import { Sparkle } from "@/components/decor";
 import { btnForest, btnGhost, heading, monoTag } from "@/lib/ui";
 import { decideOrganiser } from "./actions";
+import { Skeleton } from "@/components/skeleton";
+import { SubmitButton } from "@/components/submit-button";
 
 export const metadata = { title: "Admin | FCSIT Event Hub" };
 
@@ -20,7 +22,7 @@ export default function AdminPage() {
           manage all users and roles &rarr;
         </Link>
       </header>
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading...</p>}>
+      <Suspense fallback={<Skeleton variant="list" />}>
         <PendingList />
       </Suspense>
     </div>
@@ -58,10 +60,10 @@ async function PendingList() {
           </div>
           <div className="flex gap-2">
             <form action={decideOrganiser.bind(null, p.user_id, true)}>
-              <button className={btnForest}>Approve</button>
+              <SubmitButton className={btnForest} pendingLabel="Approving...">Approve</SubmitButton>
             </form>
             <form action={decideOrganiser.bind(null, p.user_id, false)}>
-              <button className={btnGhost}>Reject</button>
+              <SubmitButton className={btnGhost} pendingLabel="Rejecting...">Reject</SubmitButton>
             </form>
           </div>
         </li>

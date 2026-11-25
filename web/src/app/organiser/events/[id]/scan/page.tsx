@@ -5,13 +5,14 @@ import { requireOrganiser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { Scanner } from "./scanner";
 import { heading, monoTag } from "@/lib/ui";
+import { Skeleton } from "@/components/skeleton";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export default function ScanPage(props: PageProps<"/organiser/events/[id]/scan">) {
   return (
     <div className="mx-auto max-w-lg space-y-6">
-      <Suspense fallback={<p className={`${monoTag} text-muted`}>loading scanner...</p>}>
+      <Suspense fallback={<Skeleton variant="form" />}>
         <ScanGuard params={props.params} />
       </Suspense>
     </div>

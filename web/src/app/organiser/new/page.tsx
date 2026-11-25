@@ -4,6 +4,7 @@ import { requireOrganiser } from "@/lib/auth";
 import { heading, monoTag } from "@/lib/ui";
 import { createEvent } from "../actions";
 import { EventForm } from "./event-form";
+import { Skeleton } from "@/components/skeleton";
 
 export const metadata = { title: "New event | FCSIT Event Hub" };
 
@@ -16,7 +17,7 @@ export default function NewEventPage() {
       <div className="rounded-[var(--radius-bento)] bg-paper p-6 sm:p-8">
         <p className={`${monoTag} text-muted`}>{"// create"}</p>
         <h1 className={`${heading} mt-1 mb-6 text-5xl`}>New event</h1>
-        <Suspense fallback={<p className={`${monoTag} text-muted`}>loading...</p>}>
+        <Suspense fallback={<Skeleton variant="form" />}>
           <Guarded />
         </Suspense>
       </div>
